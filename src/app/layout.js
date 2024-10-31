@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-    title: "DrakorList",
+    title: "Miku Chan",
     description: "Website Drakor Indonesia",
 };
 
