@@ -10,10 +10,10 @@ const Navbar = () => {
                     <a href="/" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
                         Home
                     </a>
-                    <a href="#" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
+                    <a href="/about" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
                         About
                     </a>
-                    <a href="#" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
+                    <a href="/contact" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
                         Contact
                     </a>
                 </div>
