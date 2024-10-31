@@ -35,6 +35,7 @@ const Home = async () => {
                         <AnimeList title={data.title} image={data.images.webp.image_url} id={data.mal_id} />
                     </div>
                 ))}
+                ddddddd
             </div>
         </div>
     );
