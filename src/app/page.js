@@ -1,8 +1,27 @@
+"use client";
 import AnimeList from "@/components/AnimeList";
 import Link from "next/link";
-const Home = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/top/anime?limit=8`);
-    const anime = await response.json();
+import { useCallback, useEffect, useState } from "react";
+
+const Home = () => {
+    const [anime, setAnime] = useState([]);
+
+    const getAnime = useCallback(async () => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/top/anime?limit=8`);
+            if (!response.ok) {
+                throw new Error("Something went wrong!");
+            }
+            const res = await response.json();
+            setAnime(res.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
+    useEffect(() => {
+        getAnime();
+    }, []);
     return (
         <div className="p-6 bg-gray-100 rounded-lg shadow-md">
             <div className="flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow">
@@ -12,13 +31,14 @@ const Home = async () => {
                 </Link>
             </div>
             <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-6">
-                {anime.data.map((data) => {
+                {anime.map((data) => {
                     return (
                         <div key={data.mal_id} className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:shadow-xl hover:scale-103">
                             <AnimeList title={data.title} image={data.images.webp.image_url} id={data.mal_id} />
                         </div>
                     );
                 })}
+                {anime.length < 1 && <h1 className="font-bold text-gray-500">Not Found</h1>}
             </div>
         </div>
     );
