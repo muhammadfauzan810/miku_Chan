@@ -1,6 +1,6 @@
 import AnimeList from "@/components/AnimeList";
 const Home = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/top/anime?limit=8`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/top/anime`);
     const anime = await response.json();
     return (
         <div className="p-6 bg-gray-100 rounded-lg shadow-md">
