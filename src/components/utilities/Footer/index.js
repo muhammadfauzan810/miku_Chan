@@ -4,7 +4,7 @@ const Footer = () => {
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-start mb-8">
                     <div className="mb-6 md:mb-0">
-                        <h2 className="text-3xl font-bold mb-2">Anime List</h2>
+                        <h2 className="text-3xl font-bold mb-2">Miku Chan</h2>
                         <p className="text-sm text-gray-400">
                             "Bergabunglah dengan kami di Anime List untuk merayakan kecintaan kita terhadap anime, <br />
                             Temukan dunia anime yang penuh warna dan jadilah bagian dari komunitas kami!"
