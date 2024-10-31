@@ -1,14 +1,17 @@
 "use client";
 import AnimeList from "@/components/AnimeList";
+import { apiUrl } from "@/utility";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+
+export const apiUrl = new URL(process.env.NEXT_PUBLIC_API_BASE_URL ?? "");
 
 const Home = () => {
     const [anime, setAnime] = useState([]);
 
     const getAnime = useCallback(async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/top/anime?limit=8`);
+            const response = await fetch(`${apiUrl}/top/anime?limit=8`);
             if (!response.ok) {
                 throw new Error("Something went wrong!");
             }
