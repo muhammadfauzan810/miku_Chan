@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Navbar = () => {
     return (
         <nav className="flex items-center justify-between flex-wrap bg-gray-900 shadow-lg p-6">
@@ -7,15 +9,15 @@ const Navbar = () => {
 
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                 <div className="text-sm lg:flex-grow flex items-center space-x-4">
-                    <a href="/" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
+                    <Link href="/" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
                         Home
-                    </a>
-                    <a href="/about" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
+                    </Link>
+                    <Link href="/about" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
                         About
-                    </a>
-                    <a href="/contact" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
+                    </Link>
+                    <Link href="/contact" className="block text-teal-200 hover:text-white transition duration-300 ease-in-out">
                         Contact
-                    </a>
+                    </Link>
                 </div>
                 <div className="mt-4 lg:mt-0 lg:ml-4 relative">
                     <input type="text" placeholder="Search..." className="bg-gray-800 text-white rounded-md py-2 pl-10 pr-4 focus:outline-none focus:ring focus:ring-teal-500" />

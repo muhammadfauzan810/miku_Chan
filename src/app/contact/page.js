@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Contact = () => {
     return (
         <div className="flex flex-col items-center p-6 bg-gradient-to-b from-gray-50 to-gray-200 min-h-screen">
@@ -56,15 +58,15 @@ const Contact = () => {
                 <h2 className="text-2xl font-semibold mb-4 text-gray-800">Informasi Kontak</h2>
                 <p className="text-lg text-gray-700">
                     📧 Email:{" "}
-                    <a href="mailto:support@mikuchan.com" className="text-teal-500 hover:underline">
+                    <Link href="mailto:support@mikuchan.com" className="text-teal-500 hover:underline">
                         support@mikuchan.com
-                    </a>
+                    </Link>
                 </p>
                 <p className="text-lg text-gray-700">
                     📞 Telepon:{" "}
-                    <a href="tel:+62123456789" className="text-teal-500 hover:underline">
+                    <Link href="tel:+62123456789" className="text-teal-500 hover:underline">
                         +62 123 456 789
-                    </a>
+                    </Link>
                 </p>
                 <p className="text-lg text-gray-700">🏠 Alamat: Jl. Anime No. 1, Jakarta, Indonesia</p>
             </div>
