@@ -1,10 +1,10 @@
 "use client";
 import AnimeList from "@/components/AnimeList";
-import Link from "next/link";
+import Header from "@/components/AnimeList/Header";
 import { useCallback, useEffect, useState } from "react";
 
-const Home = () => {
-    const [anime, setAnime] = useState([]);
+const Page = () => {
+    const [topAnime, setAnime] = useState([]);
 
     const getAnime = useCallback(async () => {
         try {
@@ -13,9 +13,10 @@ const Home = () => {
                 throw new Error("Something went wrong!");
             }
             const res = await response.json();
-            setAnime(res.data);
+            setAnime(res.data || []); // Ensure setAnime is always called with an array
         } catch (error) {
             console.error("Error fetching anime data:", error);
+            setAnime([]); // Set an empty array on error to avoid issues in AnimeList
         }
     }, []);
 
@@ -25,25 +26,15 @@ const Home = () => {
 
     return (
         <div className="p-6 bg-gray-100 rounded-lg shadow-md">
-            <div className="flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow">
-                <h1 className="text-3xl font-extrabold text-gray-800">Paling Populer</h1>
-                <Link href="/semua-anime" className="px-5 py-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
-                    Lihat Semua
-                </Link>
-            </div>
-            <div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-6">
-                {anime.length > 0 ? (
-                    anime.map((data) => (
-                        <div key={data.mal_id} className="bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:shadow-xl hover:scale-103">
-                            <AnimeList title={data.title} image={data.images.webp.image_url} id={data.mal_id} />
-                        </div>
-                    ))
-                ) : (
-                    <h1 className="font-bold text-gray-500">Not Found</h1>
-                )}
-            </div>
+            {/* Anime Paling Populer */}
+            <section>
+                <Header title="Paling Populer" linkHref="Lihat Semua" linkTitle="/populer" />
+                <AnimeList api={topAnime} />
+            </section>
+
+            {/* Anime Terbaru */}
         </div>
     );
 };
 
-export default Home;
+export default Page;

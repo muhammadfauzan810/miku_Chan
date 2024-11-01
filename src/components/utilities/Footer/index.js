@@ -8,7 +8,7 @@ const Footer = () => {
                     <div className="mb-6 md:mb-0">
                         <h2 className="text-3xl font-bold mb-2">Miku Chan</h2>
                         <p className="text-sm text-gray-400">
-                            &quot;Bergabunglah dengan kami di Anime List untuk merayakan kecintaan kita terhadap anime, <br />
+                            &quot;Bergabunglah dengan kami di Miku Chan untuk merayakan kecintaan kita terhadap anime, <br />
                             Temukan dunia anime yang penuh warna dan jadilah bagian dari komunitas kami!&quot;
                         </p>
                     </div>
