@@ -14,36 +14,36 @@ const Footer = () => {
                     </div>
                     <div className="flex flex-col md:flex-row">
                         <div className="mb-4 md:mb-0 md:mr-10">
-                            <h3 className="font-semibold mb-2 text-lg">Quick Links</h3>
+                            <h3 className="font-semibold mb-2 text-lg border-b-2 border-teal-400 pb-1">Quick Links</h3>
                             <ul className="space-y-2">
                                 <li>
-                                    <Link href="/" className="hover:text-teal-400 transition duration-300">
+                                    <Link href="/" className="hover:text-teal-400 transition duration-300 py-1 px-2 rounded-lg hover:bg-gray-800">
                                         Home
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/about" className="hover:text-teal-400 transition duration-300">
+                                    <Link href="/about" className="hover:text-teal-400 transition duration-300 py-1 px-2 rounded-lg hover:bg-gray-800">
                                         About
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/contact" className="hover:text-teal-400 transition duration-300">
+                                    <Link href="/contact" className="hover:text-teal-400 transition duration-300 py-1 px-2 rounded-lg hover:bg-gray-800">
                                         Contact Us
                                     </Link>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h3 className="font-semibold mb-2 text-lg">Follow Us</h3>
+                            <h3 className="font-semibold mb-2 text-lg border-b-2 border-teal-400 pb-1">Follow Us</h3>
                             <div className="flex space-x-4">
                                 <Link href="https://www.facebook.com/profile.php?id=100005817349296" target="_blank" className="hover:text-teal-400 transition duration-300">
-                                    <i className="fab fa-facebook-f"></i> {/* FontAwesome icon */}
+                                    <i className="fab fa-facebook-f text-lg"></i>
                                 </Link>
                                 <Link href="https://github.com/muhammadfauzan810" target="_blank" className="hover:text-teal-400 transition duration-300">
-                                    <i className="fa-brands fa-github"></i>
+                                    <i className="fa-brands fa-github text-lg"></i>
                                 </Link>
                                 <Link href="https://www.instagram.com/pohon_8109/" target="_blank" className="hover:text-teal-400 transition duration-300">
-                                    <i className="fab fa-instagram"></i>
+                                    <i className="fab fa-instagram text-lg"></i>
                                 </Link>
                             </div>
                         </div>
@@ -51,7 +51,7 @@ const Footer = () => {
                 </div>
                 <div className="border-t border-gray-700 pt-4 text-center">
                     <p className="text-sm">&copy; 2024 Miku Chan.</p>
-                    <div className="mt-2">
+                    {/* <div className="mt-2">
                         <Link href="/privacy" className="hover:underline text-gray-400">
                             Privacy Policy
                         </Link>
@@ -59,7 +59,7 @@ const Footer = () => {
                         <Link href="/terms" className="hover:underline text-gray-400">
                             Terms of Service
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </footer>

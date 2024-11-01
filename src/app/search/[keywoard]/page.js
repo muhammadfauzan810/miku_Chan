@@ -45,7 +45,7 @@ const Page = ({ params }) => {
     return (
         <div className="p-6 bg-gray-100 rounded-lg shadow-md">
             <section>
-                <Header title={`Pencarian: ${keywoard}`} />
+                <Header title={`Berikut hasil Pencarian: ${keywoard}...`} />
                 <AnimeList api={anime} />
             </section>
         </div>
