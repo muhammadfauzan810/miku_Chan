@@ -6,24 +6,31 @@ import Header from "@/components/AnimeList/Header";
 import { FaExclamationTriangle } from "react-icons/fa";
 
 const Page = ({ params }) => {
-    const { keywoard } = params; // Mengambil keywoard dari params
+    // Ubah 'keyword' menjadi 'keywoard'
+    const { keywoard } = params || {}; // Menambahkan fallback untuk params
     const [anime, setAnime] = useState([]);
     const [errorMessage, setErrorMessage] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const SearchAnime = useCallback(async () => {
-        if (!keywoard) return;
+    const searchAnime = useCallback(async () => {
+        if (!keywoard) {
+            console.warn("Keywoard tidak ditemukan"); // Log jika keywoard tidak ada
+            return;
+        }
 
         setLoading(true);
         setErrorMessage("");
 
         try {
-            // Encode kata kunci untuk URL
-            const formattedKeyword = encodeURIComponent(keywoard.trim());
-            const response = await fetch(`https://api.jikan.moe/v4/anime?q=${formattedKeyword}`);
-            if (!response.ok) throw new Error("Something went wrong!");
+            const formattedKeywoard = encodeURIComponent(keywoard.trim());
+            console.log("Mencari anime dengan keywoard:", formattedKeywoard); // Log keywoard yang dicari
+
+            const response = await fetch(`https://api.jikan.moe/v4/anime?q=${formattedKeywoard}`);
+            if (!response.ok) throw new Error("Terjadi kesalahan saat mengambil data.");
 
             const res = await response.json();
+            console.log("Respons API:", res); // Log respons dari API
+
             if (res.data && res.data.length > 0) {
                 setAnime(res.data);
             } else {
@@ -40,32 +47,22 @@ const Page = ({ params }) => {
     }, [keywoard]);
 
     useEffect(() => {
+        console.log("Keywoard di useEffect:", keywoard); // Log keywoard sebelum pencarian
         if (keywoard) {
-            SearchAnime();
+            searchAnime();
         }
-    }, [SearchAnime, keywoard]);
+    }, [searchAnime, keywoard]);
 
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key === "Enter") {
-                SearchAnime();
-            }
-        };
-
-        window.addEventListener("keydown", handleKeyDown);
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
-    }, [SearchAnime]);
-
-    // Membersihkan tampilan keywoard dari %20
-    const displayKeyword = keywoard ? keywoard.replace(/%20/g, " ") : "";
+    const displayKeywoard = keywoard ? keywoard.replace(/%20/g, " ") : "";
 
     return (
         <div className="flex flex-col min-h-screen">
             <div className="flex-grow p-6 bg-gray-50 rounded-lg shadow-lg transition-transform duration-300 hover:scale-102">
                 <section className="flex flex-col items-center justify-center min-h-[60vh]">
-                    <Header title={`Hasil Pencarian untuk: ${displayKeyword}...`} />
+                    <Header
+                        title={`Hasil Pencarian untuk: ${displayKeywoard}...`}
+                        linkTitle={`/search?keywoard=${encodeURIComponent(displayKeywoard)}`} // Ubah di sini juga
+                    />
                     {loading ? (
                         <span className="text-xl text-gray-600">Sedang mencari...</span>
                     ) : errorMessage ? (

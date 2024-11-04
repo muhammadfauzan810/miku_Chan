@@ -61,9 +61,14 @@ const Page = () => {
             ) : (
                 <div>
                     <section>
-                        <HeaderAction title="Anime Action" linkHref="Lihat Semua" linkTitle="/action" />
+                        <HeaderAction
+                            title="Anime Action"
+                            linkHref="Lihat Semua"
+                            linkTitle="/action" // Pastikan URL ini sesuai dengan rute yang ada
+                        />
                         {actionAnime.length > 0 ? <AnimeAction api={actionAnime} /> : <p>Tidak ada anime aksi untuk ditampilkan.</p>}
                     </section>
+
                     <section className="mb-8 mt-5">
                         <Header title="Paling Populer" linkHref="Lihat Semua" linkTitle="/populer" />
                         <AnimeList api={topAnime} />
