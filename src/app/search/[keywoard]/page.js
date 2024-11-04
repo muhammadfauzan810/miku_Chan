@@ -1,64 +1,71 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react"; // Import React here
+
+import React, { useCallback, useEffect, useState } from "react";
 import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
 import { FaExclamationTriangle } from "react-icons/fa";
 
 const Page = ({ params }) => {
-    const { keywoard } = React.use(params); // Unwrap params with React.use()
-    const [anime, setAnime] = useState([]); // State for storing anime data
-    const [errorMessage, setErrorMessage] = useState(""); // State for storing error messages
-    const [loading, setLoading] = useState(false); // State for loading status
+    const { keywoard } = params; // Mengambil keywoard dari params
+    const [anime, setAnime] = useState([]);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const SearchAnime = useCallback(async () => {
-        if (!keywoard) return; // Exit if no keyword
+        if (!keywoard) return;
 
-        setLoading(true); // Set loading to true
-        setErrorMessage(""); // Reset error message before search
+        setLoading(true);
+        setErrorMessage("");
+
         try {
-            const response = await fetch(`https://api.jikan.moe/v4/anime?q=${keywoard}`);
+            // Encode kata kunci untuk URL
+            const formattedKeyword = encodeURIComponent(keywoard.trim());
+            const response = await fetch(`https://api.jikan.moe/v4/anime?q=${formattedKeyword}`);
             if (!response.ok) throw new Error("Something went wrong!");
 
             const res = await response.json();
             if (res.data && res.data.length > 0) {
                 setAnime(res.data);
             } else {
-                setAnime([]); // Clear anime data if no results
-                setErrorMessage("Judul tidak ditemukan."); // Set error message
+                setAnime([]);
+                setErrorMessage("Judul tidak ditemukan.");
             }
         } catch (error) {
             console.error("Error fetching anime data:", error);
-            setAnime([]); // Clear anime data
-            setErrorMessage("Terjadi kesalahan saat mengambil data."); // Set error message
+            setAnime([]);
+            setErrorMessage("Terjadi kesalahan saat mengambil data.");
         } finally {
-            setLoading(false); // Set loading to false
+            setLoading(false);
         }
     }, [keywoard]);
 
     useEffect(() => {
         if (keywoard) {
-            SearchAnime(); // Trigger anime search whenever keyword changes
+            SearchAnime();
         }
     }, [SearchAnime, keywoard]);
 
     useEffect(() => {
         const handleKeyDown = (event) => {
             if (event.key === "Enter") {
-                SearchAnime(); // Trigger search on Enter key press
+                SearchAnime();
             }
         };
 
-        window.addEventListener("keydown", handleKeyDown); // Add event listener
+        window.addEventListener("keydown", handleKeyDown);
         return () => {
-            window.removeEventListener("keydown", handleKeyDown); // Remove listener on unmount
+            window.removeEventListener("keydown", handleKeyDown);
         };
     }, [SearchAnime]);
+
+    // Membersihkan tampilan keywoard dari %20
+    const displayKeyword = keywoard ? keywoard.replace(/%20/g, " ") : "";
 
     return (
         <div className="flex flex-col min-h-screen">
             <div className="flex-grow p-6 bg-gray-50 rounded-lg shadow-lg transition-transform duration-300 hover:scale-102">
                 <section className="flex flex-col items-center justify-center min-h-[60vh]">
-                    <Header title={`Hasil Pencarian untuk: ${keywoard}...`} />
+                    <Header title={`Hasil Pencarian untuk: ${displayKeyword}...`} />
                     {loading ? (
                         <span className="text-xl text-gray-600">Sedang mencari...</span>
                     ) : errorMessage ? (
@@ -74,7 +81,9 @@ const Page = ({ params }) => {
                         </div>
                     ) : anime.length > 0 ? (
                         <AnimeList api={anime} />
-                    ) : null}
+                    ) : (
+                        <span className="text-xl text-gray-600">Tidak ada hasil ditemukan.</span>
+                    )}
                 </section>
             </div>
         </div>

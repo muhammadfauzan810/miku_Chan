@@ -2,13 +2,11 @@ import Link from "next/link";
 
 const Header = ({ title, linkHref, linkTitle }) => {
     return (
-        <div className="flex justify-between items-center mb-6 p-4 bg-white rounded-lg shadow">
-            <h1 className="text-3xl font-extrabold text-gray-800">{title}</h1>
-            {linkHref && linkTitle ? (
-                <Link href="{linkTitle}" className="px-5 py-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
-                    {linkHref}
-                </Link>
-            ) : null}
+        <div className="flex justify-between items-center mb-6 p-5 bg-gradient-to-r from-teal-600 to-gray-900 rounded-lg shadow-md transition-transform transform hover:scale-103">
+            <h1 className="text-4xl font-extrabold text-white drop-shadow-lg">{title}</h1>
+            <Link href={linkTitle} className="bg-white text-teal-600 font-semibold text-lg rounded-lg px-4 py-2 shadow hover:bg-gray-100 transition duration-300 ease-in-out">
+                {linkHref}
+            </Link>
         </div>
     );
 };

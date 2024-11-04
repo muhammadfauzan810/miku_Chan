@@ -40,3 +40,21 @@ img:hover {
 .animate-fade-in {
     animation: fade-in 0.5s ease-in-out forwards;
 }
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    99% {
+        transform: translateX(-50%); /* Scroll hampir penuh */
+    }
+    100% {
+        transform: translateX(0); /* Kembali ke posisi awal */
+    }
+}
+
+.animate-scroll {
+    display: flex;
+    animation: scroll 60s linear infinite; /* Durasi yang lebih panjang */
+    white-space: nowrap; /* Mencegah item terbungkus */
+}
